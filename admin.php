@@ -14,26 +14,8 @@ if ($_SESSION['sessionUser']) {
     <link rel="stylesheet" href="css/style.css"> 
 </head>
 <body id="otherPages">
-<header>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top navbar-custom">
-      <a class="navbar-brand" href="index.php">WHAT<span class="chnageit">2</span>WATCH <i class="fas fa-video sitetextgen"></i> </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <span style="color:#55595c;" class="nav-link"> 》Every refresh new movies </span>
-      </li>
-      </ul>
-      <?php 
-      if (isset($_SESSION['sessionUser'])){
-        echo '<span class="btn btn-info my-2"><i class="fas fa-users-cog"></i> Welcome back, ' .$_SESSION['sessionUser'] .'</span>';
-      }
-      ?>
-      </div>
-      </nav>
-    </header>
+  <?php require 'inc/header.php' ?>
+  <main>
     <div class="mx-auto sitetextgen" style="width:80%;margin-top:5%; margin-bottom:10px;">
     <div id="panel" class="width40 float-left">
         <h2><i class="fas fa-id-card"></i> Your profile:</h2>
@@ -45,9 +27,12 @@ if ($_SESSION['sessionUser']) {
     </div>
     </div>
     <div id="carus" class="clearfix sitetextgen">
-    <div id="panel" class="width40">    
+    <div id="panel" class="width40" style="max-height:900px;">    
     <h2> <i class="fa fa-plus"></i> Add New Trailer</h2>
     <?php 
+
+    //Session variables messages in case trailer is added successefully or not (saveinfo.php)
+
         if(isset($_SESSION['successpost'])){
             echo '<h4 class="p-2 mb-2 bg-success text-white">'.$_SESSION['successpost'].'</h4>';
             unset($_SESSION['successpost']);
@@ -106,6 +91,9 @@ if ($_SESSION['sessionUser']) {
         <div id="panel" class="width60">  
         <h2><i class="fas fa-edit"></i> Remove/Edit Trailer</h2>
         <?php 
+
+        //Session variables messages in case trailer is modified/removed successefully or not (edittrailer.php && deletetrailer.php)
+
         if(isset($_SESSION['success'])){
             echo '<h4 class="p-2 mb-2 bg-success text-white">'.$_SESSION['success'].'</h4>';
             unset($_SESSION['success']);
@@ -122,14 +110,16 @@ if ($_SESSION['sessionUser']) {
           echo '<h4 class="p-2 mb-2 bg-danger text-white">'.$_SESSION['erroredit'].'</h4>';
           unset($_SESSION['erroredit']);
         }
-        $query = 'SELECT * from movies';
+
+        $query = 'SELECT * from movies'; //This query to select all the rows and see if there exit any movie
         $result = pg_query($dbconn,$query) or die('Query failed: ' .pg_last_error());
         $numRow = pg_num_rows($result);
         if($numRow == 0){
-            echo '<h3>No movies are found,<br> please add at least one trailer</h3>';
+            echo '<h3>No movies are found,<br> please add at least one movie</h3>';
         }
+        //There are movies in DB
         else {
-            $i = 1;
+            $i = 1; // Counter for movies
             echo '<table class="table table-hover table-dark">
                     <thead>
                         <tr>
@@ -142,6 +132,19 @@ if ($_SESSION['sessionUser']) {
                     <tbody>
             
             ';
+            $showperpage = 10; // Number of movies per page
+            $numberofPages = ceil($numRow/$showperpage);
+            if(isset($_GET['showMovies'])){
+              $page = $_GET['showMovies'];
+            }
+
+            else {
+              $page = 1; //If not recive showMovies from path so assign page 1
+            }
+
+            $pageNumber = (($page-1)*$showperpage);
+            $query = 'SELECT * from movies LIMIT $1 OFFSET $2';
+            $result=pg_query_params($dbconn, $query, array($showperpage,$pageNumber));
             while($line = pg_fetch_array($result,null,PGSQL_ASSOC)){
 
                 echo '<tr>
@@ -168,20 +171,35 @@ if ($_SESSION['sessionUser']) {
 
                 ';  
                 $i += 1;
-
+            // End else of "there is movis in DB"
             }
-            echo '<tbody>
-                </table>';
-        }
-        ?>
+            ?>
+            <tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+            <?php
+            for($page=1;$page<=$numberofPages;$page++){
+              if(isset($_GET['showMovies'])) {
+              echo '<li class="page-item '. ((($page) == ($_GET['showMovies'])) ? 'active': '') .'" ><a class="page-link" href="admin.php?showMovies='.$page.'">'.$page.'</a></li>';
+              }
+              else {
+                echo '<li class="page-item '. ((($page) == (1)) ? 'active': '') .'" ><a class="page-link" href="admin.php?showMovies='.$page.'">'.$page.'</a></li>';
+              }
+            }
+            ?>
+            </ul>
+            </nav>
         </div>
+    <?php } ?>
+        
     </div>
     <!-- Modal -->
     <div class="modal fade" id="movieModal">
       <div class="modal-dialog modal-lg modal-dialog-centered"> <!--Added style with with because it doesn't work together with scrollable-->
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editing of </h5>
+            <h5 class="modal-title" id="exampleModalLabel"></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -197,9 +215,9 @@ if ($_SESSION['sessionUser']) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/addtrailer.js"></script>
     <script type="text/javascript" src="js/alljs.js"></script>
+    </main>
     </body>
 </html>
-
 <?php
 }
 else {

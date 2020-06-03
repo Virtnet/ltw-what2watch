@@ -1,5 +1,4 @@
-$(document).ready(function(){ //Questo ci permette di scrivere il codice JQuery dove vogliamo, appena si e caricata la pagina la funzionalita inizia di funzionare
-
+    //Logo
     
     $('.navbar-brand').mouseenter(function(){
       $('.chnageit').css('color','#21c7e1');
@@ -12,29 +11,43 @@ $(document).ready(function(){ //Questo ci permette di scrivere il codice JQuery 
       $('.nav-link').css('color','#55595c');
       $('.nav-link').animate({fontSize:"16px"},1000);
     });
-
+    
+    
     //Trailer Sort
-
-    //var seletedVal = $(".form-control option:selected").text();
-    $('.form-control').change(function(){ //For any chnage of the select and selects from the select filed.
-      var selectVal = $(this).val(); //Takes the values of select and puts it to selectVal
+    // Initialize the localStorage by changing the genre
+    
+    var selectedValue = document.getElementById("exampleFormControlSelect1");
+      selectedValue.addEventListener("change",function(){
+        localStorage.setItem("selVal",this.value);
+      });
+      var val = localStorage.getItem("selVal");
+      if (val) selectedValue.value = val;
+      selectedValue.onchange();
+      
+    sortMovies();
+    function sortMovies(){
+    var selectVal = $('.form-control').val(); //Takes the values of select and puts it to selectVal
       $.ajax({
         url: 'sort.php',
         type:'POST',
         data: {'genere': selectVal},
         success: function(response){
-          $(".row-cols-md-5").fadeOut('slow',function() { //with a callback_function, This callback function executes when the fade out effect is complete. You can use this to set alert or display a message on the screen when fadeout effect is complete.
+          $(".row-cols-md-5").fadeOut('fast',function() { //with a callback_function, This callback function executes when the fade out effect is complete. You can use this to set alert or display a message on the screen when fadeout effect is complete.
             $(".row-cols-md-5").html(response);
             $(".row-cols-md-5").fadeIn('slow');
           });
         }
       });
-    });
+    }
+
+$(document).ready(function(){ 
+  //Questo ci permette di scrivere il codice JQuery dove vogliamo, appena si e caricata la pagina la funzionalita inizia a funzionare
+  //method will run once the page DOM is ready to execute JavaScript code.
+    
 
     //Trailer Info
 
-    //$('.movieopen').click(function(){
-    $(document).on('click','.movieopen',function() { // Attach an event handler function for one or more events to the selected elements
+    $(document).on('click','.movieopen',function() { //Attach an event handler function for one or more events to the selected elements,will bind on all element .movieopen that are not presented at the time of biding event.
       var movtitle = $(this).data('title');
       var idmov = $(this).data('id');
       $('.modal-title').text(movtitle);
@@ -45,7 +58,6 @@ $(document).ready(function(){ //Questo ci permette di scrivere il codice JQuery 
       data: {'postID': idmov}, //Sends to trailerInfo the idmov with the name postID that will be avaiable in side server.
       success: function(response){  //in response we get all the returned info from trailerInfo.php 
         // Add response in Modal body
-        //document.getElementById(".modal-body").innerHTML =response;
         $('.modal-body').html(response);
         // Display Modal
         $('#movieModal').modal('show'); 
@@ -61,8 +73,7 @@ $(document).ready(function(){ //Questo ci permette di scrivere il codice JQuery 
 
     //Trailer Editing
 
-        $('button#editbutton').click(function(){
-        //$(document).on('click','.movieopen',function() { //Attach an event handler function for one or more events to the selected elements,will bind on all element .movieopen that are not presented at the time of biding event.
+    $('button#editbutton').click(function(){
             var movtitle = $(this).data('title');
             var idmov = $(this).data('id');
             $('.modal-title').text(movtitle);
@@ -73,7 +84,6 @@ $(document).ready(function(){ //Questo ci permette di scrivere il codice JQuery 
             data: {'postID': idmov}, //Sends to trailerInfo the idmov with the name postID that will be avaiable in side server.
             success: function(response){  //in response we get all the returned info from trailerInfo.php 
               // Add response in Modal body
-              //document.getElementById(".modal-body").innerHTML =response;
               $('.modal-body').html(response);
               // Display Modal
               $('#movieModal').modal('show'); 

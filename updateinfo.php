@@ -34,13 +34,16 @@ if(isset($_POST['updatebutton'])) {
     $qrun = pg_query_params($dbconn,$q,array($title,$plot,$director,$yearr,$imdb,$postimg,$coverimg,$genres,$duration,$ytlink,$idmov)) or die ('Query failed ' . pg_last_error());
 
     if($qrun) {
-        $_SESSION['successedit'] = 'The trailer updated successefully';
+        $_SESSION['successedit'] = 'The trailer updated successfully';
         header('Location: admin.php');
     }
     else {
-        $_SESSION['erroredit'] = 'The trailer is not updated successefully';
+        $_SESSION['erroredit'] = 'The trailer is not updated successfully';
         header('Location admin.php');
     }
+
+    pg_free_result($result); // Free the memory
+    pg_close($dbconn); // Close the connection
 
 }
 else {

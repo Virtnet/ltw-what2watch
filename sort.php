@@ -7,7 +7,7 @@ if(isset($_POST['genere'])){
         $show = '';
         $noshow = "<h2>We're Sorry, no movies are found in ".$gentoSearch." genre </h2>";
         if ($gentoSearch == 'All genres'){
-            $query = 'SELECT * FROM movies order by random() LIMIT 15';
+            $query = 'SELECT * FROM movies order by random() LIMIT 10';
         }
         else {
             $query = "SELECT * FROM movies WHERE '$gentoSearch' = any(genres) ORDER BY random() LIMIT 15";

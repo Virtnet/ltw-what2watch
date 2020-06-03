@@ -14,6 +14,9 @@ if(isset($_POST['deletebutton'])) {
         $_SESSION['notsuccess'] = 'The trailer not removed successfully';
         header('Location: admin.php');
     }
+
+    pg_free_result($result); // Free the memory
+    pg_close($dbconn); // Close the connection
 }
 else {
     header('Location: index.php');
