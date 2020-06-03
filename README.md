@@ -26,16 +26,33 @@ Used for the following functions:
 
 ### What inside?
 
-**dbconnect.php** - in order to establish a connection to the database. (Must at first to be edited)
-**index.php** - the main page of the website.
-**sort.php** - sends a query to the database by selected genre and retrieve movies in random order from database.
-**login.php** - login page for admin only.
-**loginform.php** - check if admin does exists and opens a session.
-**admin.php** - Admin Panel page.
-**deletetrailer.php** - deletes the movie which was clicked on delete button.
-**edittrailer.php** - Gets movie infomation from database and returns as response into Bootstrap modal which will allows us to edit the current movie.
-**trailerinfo.php** - Gets movie information and shows inside Bootstrap modal.
+**dbconnect.php** - In order to establish a connection to the database. (Must at first to be edited)
 
-......
-to be continued
+**inc/header.php** - Used in index.php,login.php and admin.php
+
+**login.php** - If you're logged in, you can logout ,it deletes all session variables.
+
+
+**index.php** - The main page of the website.
+- **sort.php** - Sends a query to the database by selected genre and retrieve movies in random order from database.
+- **trailerinfo.php** - Gets movie information and shows inside Bootstrap modal.
+- **inc/carousel.php** - Bootstrap carousel, displays latest 3 movies by year in decreasing order.
+- **js/alljs.js** - Logo aniamtion,AJAX requests and localStorage to keep the value of selected genre
+
+**login.php** - Login page for admin only uses loginform.php when submitting the login form.
+- **loginform.php** - Check if admin does exists and opens a session if does exists.
+
+**admin.php** - Admin Panel page.
+
+- **deletetrailer.php** - Deletes the movie which was clicked on delete button.
+
+- **edittrailer.php** - Gets movie infomation from database and returns as response into Bootstrap modal which will allows us to edit the current movie.
+- **updateinfo.php** - If the button "Update" cliked from the modal of edittrailer.php, updateinfo.php will run the query with the new updated information.
+- **savetrailer.php** - Add new movie-trailer section
+
+
+
+------------
+### Developed by
+**Arthur Gusein**, **Daniele Fardella**, **Fabio Caiazzo**
 
