@@ -24,7 +24,7 @@ Used for the following functions:
 	- Edit trailer
 	- Remove trailer
 
-### What inside?
+### Whats inside?
 
 **dbconnect.php** - In order to establish a connection to the database. (Must at first to be edited)
 
