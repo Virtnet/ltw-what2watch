@@ -55,7 +55,7 @@ if the lougout button will be clicked ,it will destory the session variables and
 - **updateinfo.php** - If the button "Update" cliked from the modal of edittrailer.php, updateinfo.php will run the query with the new updated information.
 - **savetrailer.php** - Add new movie - trailer section,if the movie added successfully or not,will be created session variables, in which will be available in the admin.php to show the message if movie added or not.
 
-**In the proccess of editing movie,removing and adding new movie will be created session variables in order to show to the user that the opertion done successfully or not, after that the message wil be shown the session variable will be not available as we use unset()
+**In the proccess of editing movie,removing and adding new movie will be created session variables in order to show to the user that the opertion done successfully or not, after that the message wil be shown the session variable will be not available as we use unset()**
 
 
 ### Database schema
