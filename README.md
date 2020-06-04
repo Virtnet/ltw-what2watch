@@ -41,7 +41,7 @@ Used for the following functions:
 **index.php** - The main page of the website.
 - **sort.php** - Sends a query to the database by selected genre and retrieve movies in random order from database.
 - **trailerinfo.php** - Gets movie information and shows inside Bootstrap modal in case movie is cliked in the main page (image movie,title movie) is valid also for the carousel..
-- **js/alljs.js** - Logo animation,AJAX requests and localStorage to keep the value of selected genre and scroll down animation to the section of the movies when button "Show other movies" is clicked.
+- **js/alljs.js** - Logo animation,AJAX requests using JQuery and localStorage to keep the value of selected genre and scroll down animation to the section of the movies when button "Show other movies" is clicked.
 - **logout.php** - The logout option will be presented inside the main page of the website at the header section (index.php,header.php) if the admin is logged in.
 if the lougout button will be clicked ,it will destory the session variables and destory the current session.
 
@@ -53,7 +53,10 @@ if the lougout button will be clicked ,it will destory the session variables and
 - **deletetrailer.php** - Deletes the movie which was clicked on delete button and creates a session variables which will be available to the admin.php to show the messages if the query is done successfully or not.
 - **edittrailer.php** - Gets movie information from database and returns as response into Bootstrap modal which will allows us to edit the movie cliked, if the query done successfully or not ,will be created session variables which will be available in the current session in order to show the message inside the admin.php.
 - **updateinfo.php** - If the button "Update" cliked from the modal of edittrailer.php, updateinfo.php will run the query with the new updated information.
-- **savetrailer.php** - Add new movie - trailer section ,
+- **savetrailer.php** - Add new movie - trailer section,if the movie added successfully or not,will be created session variables, in which will be available in the admin.php to show the message if movie added or not.
+
+**In the proccess of editing movie,removing and adding new movie will be created session variables in order to show to the user that the opertion done successfully or not, after that the message wil be shown the session variable will be not available as we use unset()
+
 
 ### Database schema
 ![](https://i.ibb.co/2KS203F/database.png)
