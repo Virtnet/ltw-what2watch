@@ -20,13 +20,14 @@ session_start(); // creates a session or resumes the current one based on a sess
     <?php require 'inc/carousel.php' ?>
 
     <!-- Start of Wrap -->
+    <div id="jumptoMovies"></div>
     <?php if ($hastrailers) { ?>
+    
     <div class="wrap sitetextgen">
-    <?php
-     ?>
     <div class="clearfix" style="padding-bottom:13px;">
     <div style="float:left;">
     <h2><i class="fas fa-video" style="color:#21c7e1;"></i> Looking for a movie</h2>
+    <a id="jumpto" class="btn btn-dark"><i class="fas fa-retweet"></i> Show other movies</a>
     </div>
     <div class="form-group" style="float:right;">
     <form>
@@ -44,6 +45,7 @@ session_start(); // creates a session or resumes the current one based on a sess
         <option value="Horror">Horror</option>
         <option value="Sci-fi">Sci-fi</option>
         </select>
+        
     </form>
     </div>
     </div>

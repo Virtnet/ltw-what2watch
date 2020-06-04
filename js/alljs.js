@@ -12,7 +12,6 @@
       $('.nav-link').animate({fontSize:"16px"},1000);
     });
     
-    
     //Trailer Sort
     // Initialize the localStorage by changing the genre
     
@@ -32,6 +31,7 @@
         type:'POST',
         data: {'genere': selectVal},
         success: function(response){
+          
           $(".row-cols-md-5").fadeOut('fast',function() { //with a callback_function, This callback function executes when the fade out effect is complete. You can use this to set alert or display a message on the screen when fadeout effect is complete.
             $(".row-cols-md-5").html(response);
             $(".row-cols-md-5").fadeIn('slow');
@@ -40,10 +40,24 @@
       });
     }
 
+    
+
 $(document).ready(function(){ 
   //Questo ci permette di scrivere il codice JQuery dove vogliamo, appena si e caricata la pagina la funzionalita inizia a funzionare
   //method will run once the page DOM is ready to execute JavaScript code.
-    
+
+    // IF cliked on the button "show other movies", it is going to call the function to jumptoMovies, that function will cal for AJAX request for sort and jump to the jumptoMovies
+    $('#jumpto').click(function(){
+      jumptoMovies();
+    });
+  
+    function jumptoMovies(){
+      sortMovies();
+      $('html, body').animate({
+        scrollTop: $("#jumptoMovies").offset().top - 65 // -65 as we have made fixed navbar with height of 65px, so we have to pay attention
+    }, 1000);
+  
+    }
 
     //Trailer Info
 

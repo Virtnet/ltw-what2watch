@@ -141,7 +141,7 @@ if ($_SESSION['sessionUser']) {
             else {
               $page = 1; //If not recive showMovies from path so assign page 1
             }
-
+            //$pageNumber is the offset , from which number row it will start
             $pageNumber = (($page-1)*$showperpage);
             $query = 'SELECT * from movies LIMIT $1 OFFSET $2';
             $result=pg_query_params($dbconn, $query, array($showperpage,$pageNumber));
