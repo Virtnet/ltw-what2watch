@@ -54,5 +54,5 @@ Used for the following functions:
 
 ------------
 ### Developed by
-**Arthur Gusein**, **Daniele Fardella**, **Fabio Caiazzo**
+**Arthur Gusein**, **Daniele Fardella**, **Fabio Massimo Caiazzo**
 
