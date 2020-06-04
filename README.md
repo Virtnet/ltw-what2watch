@@ -52,7 +52,8 @@ Used for the following functions:
 - **updateinfo.php** - If the button "Update" cliked from the modal of edittrailer.php, updateinfo.php will run the query with the new updated information.
 - **savetrailer.php** - Add new movie-trailer section
 
-
+### Database schema
+![](https://i.ibb.co/2KS203F/database.png)
 
 ------------
 ### Developed by
