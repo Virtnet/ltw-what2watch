@@ -27,6 +27,7 @@ Used for the following functions:
 ### What's inside?
 
 **dbconnect.php** - In order to establish a connection to the database. (Must at first to be edited)
+** TO LOGIN TO ADMIN PANEL ** - Email: arthurgusein@gmail.com , Password: sapienza
 
 **inc/header.php** - Used in index.php,login.php and admin.php
 
