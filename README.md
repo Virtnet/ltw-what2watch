@@ -7,7 +7,7 @@ No problem!
 ### Which technologies used to develop this website?
 - Bootstrap 4.5 - The main source of design.
 - JavaScript - for the input control ***(addtrailer.js)***
-- JQuery - For AJAX requests and manipulaton on the website logo. ***(alljs.js)***
+- JQuery - For AJAX requests , manipulaton on the website logo and localStorage to save selected movie genre . ***(alljs.js)***
 - AJAX - Used for asynchronous requests which allows us to recive data as response without refreshing the page,so it is invisible to the visitor.
 Used for the following functions: 
 	- Movie details that shown up on the Bootstrap modal ***(trailerinfo.php)***
