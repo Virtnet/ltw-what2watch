@@ -11,6 +11,27 @@
       $('.nav-link').css('color','#55595c');
       $('.nav-link').animate({fontSize:"16px"},1000);
     });
+
+    //Trailer Editing
+    $(document).on('click','button#editbutton',function() {
+        var movtitle = $(this).data('title');
+        var idmov = $(this).data('id');
+        $('.modal-title').text(movtitle);
+        // AJAX request
+        $.ajax({
+        url: 'edittrailer.php',
+        type: 'POST',
+        data: {'postID': idmov}, //Sends to trailerInfo the idmov with the name postID that will be avaiable in side server.
+        success: function(response){  //in response we get all the returned info from trailerInfo.php 
+          // Add response in Modal body
+          $('.modal-body').html(response);
+          // Display Modal
+          $('#movieModal').modal('show'); 
+        }
+      });
+      //Return false to cancel submit
+      return false;
+      });
     
     //Trailer Sort
     // Initialize the localStorage by changing the genre
@@ -39,7 +60,6 @@
         }
       });
     }
-
     
 
 $(document).ready(function(){ 
@@ -83,27 +103,5 @@ $(document).ready(function(){
     });
     //Return false to cancel submit
     return false;
-    });
-
-    //Trailer Editing
-
-    $('button#editbutton').click(function(){
-            var movtitle = $(this).data('title');
-            var idmov = $(this).data('id');
-            $('.modal-title').text(movtitle);
-            // AJAX request
-            $.ajax({
-            url: 'edittrailer.php',
-            type: 'POST',
-            data: {'postID': idmov}, //Sends to trailerInfo the idmov with the name postID that will be avaiable in side server.
-            success: function(response){  //in response we get all the returned info from trailerInfo.php 
-              // Add response in Modal body
-              $('.modal-body').html(response);
-              // Display Modal
-              $('#movieModal').modal('show'); 
-            }
-          });
-          //Return false to cancel submit
-          return false;
     });
 });
