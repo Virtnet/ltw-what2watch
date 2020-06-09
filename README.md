@@ -63,5 +63,5 @@ if the lougout button will be clicked ,it will destory the session variables and
 
 ------------
 ### Developed by
-**Arthur Gusein**, **Daniele Fardella**, **Fabio Massimo Caiazzo**
+**Arthur Gusein**
 
